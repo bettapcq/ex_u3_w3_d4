@@ -30,13 +30,14 @@ export const getJobsSearchedAction = (value) => {
     )
       .then((res) => {
         if (res.ok) {
-          return res.json();
+          return  
         } else {
           throw new Error('Error: ', res.status);
         }
       })
       .then((resultsArray) => {
         console.log('array della fetch: ', resultsArray);
+    
         dispatch({
           type: GET_JOBS,
           payload: resultsArray
