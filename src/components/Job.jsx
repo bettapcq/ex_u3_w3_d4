@@ -8,9 +8,12 @@ import {
   addToFavoritesAction
 } from '../redux/actions';
 
-const Job = ({ data }) => {
+const Job = () => {
   const favoritesArray = useSelector((currentState) => {
     return currentState.favorites.content;
+  });
+  const data = useSelector((currentState) => {
+    return currentState.jobs.pull;
   });
   const dispatch = useDispatch();
 
