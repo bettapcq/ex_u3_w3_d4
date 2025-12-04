@@ -1,7 +1,7 @@
 import { GET_JOBS, GET_JOBS_ERR } from '../actions';
 
 const initialState = {
-  pull: [],
+  pool: [],
   error: ''
 };
 
@@ -10,7 +10,7 @@ const jobsSearchedReducer = (currentState = initialState, action) => {
     case GET_JOBS:
       return {
         ...currentState,
-        pull: action.payload
+        pool: action.payload
       };
     case GET_JOBS_ERR:
       return {

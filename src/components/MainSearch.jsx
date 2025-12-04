@@ -8,8 +8,8 @@ const MainSearch = () => {
   const [queryValue, setQueryValue] = useState('');
 
   const dispatch = useDispatch();
-  const jobsPull = useSelector((currentState) => {
-    return currentState.jobs.pull;
+  const jobsPool = useSelector((currentState) => {
+    return currentState.jobs.pool;
   });
 
   const handleChange = (e) => {
@@ -21,7 +21,7 @@ const MainSearch = () => {
     dispatch(getJobsSearchedAction(queryValue));
   };
 
-  console.log('jobsPull: ', jobsPull);
+  console.log('jobspool: ', jobsPool);
 
   return (
     <Container>
@@ -40,7 +40,7 @@ const MainSearch = () => {
           </Form>
         </Col>
         <Col xs={10} className="mx-auto mb-5">
-          {jobsPull?.map((jobData) => (
+          {jobsPool?.map((jobData) => (
             <Job key={jobData._id} data={jobData} />
           ))}
         </Col>
