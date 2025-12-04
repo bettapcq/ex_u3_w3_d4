@@ -1,4 +1,4 @@
-import { Container, Row, Col, Form } from 'react-bootstrap';
+import { Container, Row, Col, Form, Spinner, Alert } from 'react-bootstrap';
 import Job from './Job';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
@@ -10,6 +10,12 @@ const MainSearch = () => {
   const dispatch = useDispatch();
   const jobsPool = useSelector((currentState) => {
     return currentState.jobs.pool;
+  });
+  const loading = useSelector((currentState) => {
+    return currentState.jobs.loading;
+  });
+  const error = useSelector((currentState) => {
+    return currentState.jobs.error;
   });
 
   const handleChange = (e) => {
@@ -25,7 +31,7 @@ const MainSearch = () => {
 
   return (
     <Container>
-      <Row>
+      <Row className="flex-column">
         <Col xs={10} className="mx-auto my-3">
           <h1 className="display-1">Remote Jobs Search</h1>
         </Col>
@@ -38,6 +44,10 @@ const MainSearch = () => {
               placeholder="type and press Enter"
             />
           </Form>
+        </Col>
+        <Col className="text-center my-3">
+          {loading && <Spinner variant="info" animation="grow"></Spinner>}
+          {error && <Alert variant="danger">errore nel caricamento</Alert>}
         </Col>
         <Col xs={10} className="mx-auto mb-5">
           {jobsPool?.map((jobData) => (

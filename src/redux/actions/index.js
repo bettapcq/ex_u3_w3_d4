@@ -2,6 +2,7 @@ export const ADD_TO_FAVORITES = 'ADD_TO_FAVORITES';
 export const REMOVE_FROM_FAVORITES = 'REMOVE_FROM_FAVORITES';
 export const GET_JOBS = 'GET_JOBS';
 export const GET_JOBS_ERR = 'GET_JOBS_ERR';
+export const GET_JOBS_LOADING = 'GET_JOBS_LOADING';
 
 export const addToFavoritesAction = (companySelected) => {
   return {
@@ -23,6 +24,11 @@ export const getJobsSearchedAction = (value) => {
     console.log('stato prima della fetch: ', currentState);
     console.log('valore che arriva dal search input: ', value);
 
+    dispatch({
+      type: GET_JOBS_LOADING,
+      payload: true
+    });
+
     fetch(
       'https://strive-benchmark.herokuapp.com/api/jobs?search=' +
         value +
@@ -42,12 +48,16 @@ export const getJobsSearchedAction = (value) => {
           type: GET_JOBS,
           payload: resultsArray
         });
+        dispatch({
+          type: GET_JOBS_LOADING,
+          payload: false
+        });
       })
       .catch((err) => {
         console.log('error: ', err);
         dispatch({
           type: GET_JOBS_ERR,
-          payload: JSON.stringify(err, Object.getOwnPropertyNames(err))
+          payload: true
         });
       });
     console.log('stato dopo la fetch: ', currentState);
