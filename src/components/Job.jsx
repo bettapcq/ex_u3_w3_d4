@@ -8,13 +8,11 @@ import {
   addToFavoritesAction
 } from '../redux/actions';
 
-const Job = () => {
+const Job = ({ data }) => {
   const favoritesArray = useSelector((currentState) => {
     return currentState.favorites.content;
   });
-  const data = useSelector((currentState) => {
-    return currentState.jobs.pull;
-  });
+
   const dispatch = useDispatch();
 
   const isFavorite = favoritesArray.includes(data.company_name);
